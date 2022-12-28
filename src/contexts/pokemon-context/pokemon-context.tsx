@@ -41,7 +41,7 @@ export const PokeProvider = ({ children }: { children: React.ReactNode }) => {
     }
 
     useEffect(() => {
-        fetchPokemon(1, 16)
+        fetchPokemon(1, 101)
             .then((res) => {
                 pokeDispatch({ type: 'SET_DISPLAY_POKEMON', payload: res })
             })
