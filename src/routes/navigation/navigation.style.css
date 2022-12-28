@@ -1,0 +1,29 @@
+/* NAV STYLES */
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgb(147, 147, 147);
+    position: relative;
+    height: 60px;
+}
+
+.nav-container>* {
+    margin: 10px 20px;
+}
+
+.nav-menu {
+    height: 18px;
+
+}
+
+.nav-logo {
+    height: 35px;
+    margin: 0px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-shadow: 0px 0px 10px black;
+}

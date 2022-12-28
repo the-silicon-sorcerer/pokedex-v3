@@ -1,0 +1,6 @@
+.home-content {
+    margin: 30px 30px;
+    display: grid;
+    grid-template-columns: repeat(8, minmax(150px, 1fr));
+    gap: 15px;
+}

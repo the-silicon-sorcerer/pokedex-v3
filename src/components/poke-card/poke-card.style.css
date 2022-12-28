@@ -1,0 +1,32 @@
+.home-content-card {
+    border: 1px solid black;
+    border-radius: 10px;
+    background-color: rgb(202, 202, 202);
+    text-align: center;
+}
+
+.home-content-card-img {
+    aspect-ratio: 1/1;
+    height: 140px;
+    padding: auto;
+}
+
+.home-content-card-info {
+    text-align: left;
+    padding: 5px 15px;
+}
+
+.home-content-card-info>p {
+    margin: 0px;
+}
+
+.home-content-card-info>h3 {
+    margin: 0px;
+}
+
+.home-content-card-info>div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
