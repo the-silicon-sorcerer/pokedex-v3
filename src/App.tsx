@@ -31,7 +31,7 @@ function App() {
         </div>
         <div className="home-content">
           <div className="home-content-card">
-            <img src={sampleData.sprites.front_shiny} className="home-content-card-img" />
+            <img src={sampleData.sprites.front_default} className="home-content-card-img" />
             <div className="home-content-card-info">
               <p>{`#00${sampleData.id}`}</p>
               <h3>{sampleData.name}</h3>
