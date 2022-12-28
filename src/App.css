@@ -84,3 +84,14 @@
   font-size: small;
   border: 1px solid black;
 }
+
+/* HOME CARD STYLES  */
+
+.home-content {
+  display: grid;
+  grid-auto-columns: repeat(6, 1fr);
+}
+
+.home-content-card {
+  border: 1px solid black;
+}
