@@ -2,8 +2,6 @@ import './poke-card.style.css'
 import PokeCardProps from './poke-card.types'
 
 const PokeCard = ({ pokedata }: PokeCardProps) => {
-    console.log('pokecard render')
-    console.log(pokedata)
     return (
         <div className="home-content-card">
             <img src={pokedata.sprites.front_default} className="home-content-card-img" />

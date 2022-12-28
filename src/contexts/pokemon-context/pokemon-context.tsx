@@ -2,9 +2,6 @@ import React, { createContext, useEffect, useReducer } from "react";
 import { ContextValue, PokeActions, PokeState } from './pokemon-context.types'
 import axios from "axios";
 
-import sampleData from '../../sampleData.json'
-import { PokeData } from "../../utils/general-types";
-
 export const PokeContext = createContext<ContextValue>({} as ContextValue)
 
 const pokeReducer = (state: PokeState, action: PokeActions) => {
@@ -28,26 +25,29 @@ const intialPokeState: PokeState = {
 
 export const PokeProvider = ({ children }: { children: React.ReactNode }) => {
 
-    console.log('provider render')
-
     const [pokeState, pokeDispatch] = useReducer(pokeReducer, intialPokeState)
     const value = { pokeState, pokeDispatch }
 
-    const fetchIntialPokemonArray = async (max: number) => {
-        const pokeArray: PokeData[] = []
-        for (let i = 1; i <= max; i++) {
-            await axios(`https://pokeapi.co/api/v2/pokemon/${i}`)
-                .then(({ data }) => {
-                    pokeArray.push(data)
-                })
+    const fetchPokemon = async (minId: number, maxId: number) => {
+        const pokeArray = []
+        for (let i = minId; i <= maxId; i++) {
+            pokeArray.push(axios(`https://pokeapi.co/api/v2/pokemon/${i}`))
         }
-        return pokeArray;
+        return Promise.all(pokeArray).then((res) => {
+            return res.map((res) => {
+                return res.data
+            })
+        })
     }
 
     useEffect(() => {
-        fetchIntialPokemonArray(16).then((res) => {
-            pokeDispatch({ type: 'SET_DISPLAY_POKEMON', payload: res })
-        })
+        fetchPokemon(1, 16)
+            .then((res) => {
+                pokeDispatch({ type: 'SET_DISPLAY_POKEMON', payload: res })
+            })
+            .catch((e) => {
+                throw new Error(e)
+            })
     }, [])
 
     return <PokeContext.Provider value={value}>{children}</PokeContext.Provider>
