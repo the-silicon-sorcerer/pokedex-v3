@@ -1,5 +1,6 @@
 .home-content {
     margin: 30px 30px;
+    margin-bottom: 0px;
     display: grid;
     grid-template-columns: repeat(8, minmax(150px, 1fr));
     gap: 15px;
@@ -8,4 +9,24 @@
 .loading-container {
     display: flex;
     justify-content: center;
+}
+
+.loading-container>h1 {
+    margin-top: 30px;
+    font-size: xx-large;
+    font-weight: 600;
+}
+
+.pagination-container {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0px;
+}
+
+.pagination-select {
+    margin: 0px 5px;
+}
+
+.page-button {
+    margin: 0px 5px;
 }

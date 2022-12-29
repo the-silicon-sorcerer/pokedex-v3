@@ -8,6 +8,7 @@ const Home = () => {
         <div className="home-container">
             <HomeSearch />
             <HomeContent />
+            {/* <div className='footer'></div> */}
         </div>
     )
 }
