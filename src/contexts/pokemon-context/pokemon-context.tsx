@@ -11,11 +11,7 @@ function isPokeData(payload: PokeData[] | boolean): payload is PokeData[] {
     return (payload as PokeData[]).length !== undefined;
 }
 
-function isBoolean(payload: PokeData[] | boolean): payload is boolean {
-    return typeof payload === 'boolean';
-}
-
-const pokeReducer = (state: PokeState, action: PokeActions): PokeState => {
+const pokeReducer = (state: PokeState, action: PokeActions) => {
     const { type, payload } = action
     switch (type) {
         case 'SET_DISPLAY_POKEMON':
@@ -26,7 +22,7 @@ const pokeReducer = (state: PokeState, action: PokeActions): PokeState => {
                     isLoading: false
                 }
         case 'SET_LOADING':
-            if (isBoolean(payload))
+            if (typeof payload === 'boolean')
                 return {
                     ...state,
                     isLoading: payload
