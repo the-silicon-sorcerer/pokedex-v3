@@ -1,6 +1,7 @@
 import React, { createContext, useEffect, useReducer } from "react";
 import { ContextValue, PokeActions, PokeState } from './pokemon-context.types'
 import axios from "axios";
+import { PokeData } from "../../utils/general-types";
 
 export const PokeContext = createContext<ContextValue>({} as ContextValue)
 
@@ -28,7 +29,7 @@ export const PokeProvider = ({ children }: { children: React.ReactNode }) => {
     const [pokeState, pokeDispatch] = useReducer(pokeReducer, intialPokeState)
     const value = { pokeState, pokeDispatch }
 
-    const fetchPokemon = async (minId: number, maxId: number) => {
+    const fetchPokemon = async (minId: number, maxId: number): Promise<PokeData[]> => {
         const pokeArray = []
         for (let i = minId; i <= maxId; i++) {
             pokeArray.push(axios(`https://pokeapi.co/api/v2/pokemon/${i}`))
@@ -41,7 +42,7 @@ export const PokeProvider = ({ children }: { children: React.ReactNode }) => {
     }
 
     useEffect(() => {
-        fetchPokemon(1, 101)
+        fetchPokemon(1, 16)
             .then((res) => {
                 pokeDispatch({ type: 'SET_DISPLAY_POKEMON', payload: res })
             })
