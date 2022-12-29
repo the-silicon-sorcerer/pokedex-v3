@@ -7,15 +7,19 @@ import './home-content.style.css'
 
 const HomeContent = () => {
     const { pokeState } = useContext(PokeContext)
-    const { displayPokemon } = pokeState
+    const { displayPokemon, isLoading } = pokeState
 
     return (
-        <div className="home-content">
-            {displayPokemon.map((data) => {
-                return <PokeCard pokedata={data} key={data.id} />
-            })}
-
-        </div>
+        <>
+            {isLoading ? <div className="loading-container"><h1>LOADING...</h1></div>
+                : < div className="home-content" >
+                    {
+                        displayPokemon.map((data) => {
+                            return <PokeCard pokedata={data} key={data.id} />
+                        })
+                    }
+                </div >}
+        </>
     )
 }
 

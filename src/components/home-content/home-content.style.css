@@ -4,3 +4,8 @@
     grid-template-columns: repeat(8, minmax(150px, 1fr));
     gap: 15px;
 }
+
+.loading-container {
+    display: flex;
+    justify-content: center;
+}

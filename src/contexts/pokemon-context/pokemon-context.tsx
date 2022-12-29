@@ -1,18 +1,36 @@
 import React, { createContext, useEffect, useReducer } from "react";
-import { ContextValue, PokeActions, PokeState } from './pokemon-context.types'
 import axios from "axios";
+
+import { ContextValue, PokeActions, PokeState } from './pokemon-context.types'
 import { PokeData } from "../../utils/general-types";
+import { createAction } from "../../utils/create-action";
 
 export const PokeContext = createContext<ContextValue>({} as ContextValue)
 
-const pokeReducer = (state: PokeState, action: PokeActions) => {
+function isPokeData(payload: PokeData[] | boolean): payload is PokeData[] {
+    return (payload as PokeData[]).length !== undefined;
+}
+
+function isBoolean(payload: PokeData[] | boolean): payload is boolean {
+    return typeof payload === 'boolean';
+}
+
+const pokeReducer = (state: PokeState, action: PokeActions): PokeState => {
     const { type, payload } = action
     switch (type) {
         case 'SET_DISPLAY_POKEMON':
-            return {
-                ...state,
-                displayPokemon: payload
-            }
+            if (isPokeData(payload))
+                return {
+                    ...state,
+                    displayPokemon: payload,
+                    isLoading: false
+                }
+        case 'SET_LOADING':
+            if (isBoolean(payload))
+                return {
+                    ...state,
+                    isLoading: payload
+                }
         default:
             return {
                 ...state
@@ -21,7 +39,8 @@ const pokeReducer = (state: PokeState, action: PokeActions) => {
 }
 
 const intialPokeState: PokeState = {
-    displayPokemon: []
+    displayPokemon: [],
+    isLoading: false
 }
 
 export const PokeProvider = ({ children }: { children: React.ReactNode }) => {
@@ -42,9 +61,10 @@ export const PokeProvider = ({ children }: { children: React.ReactNode }) => {
     }
 
     useEffect(() => {
+        pokeDispatch(createAction<PokeActions>("SET_LOADING", true))
         fetchPokemon(1, 16)
             .then((res) => {
-                pokeDispatch({ type: 'SET_DISPLAY_POKEMON', payload: res })
+                pokeDispatch(createAction<PokeActions>('SET_DISPLAY_POKEMON', res))
             })
             .catch((e) => {
                 throw new Error(e)

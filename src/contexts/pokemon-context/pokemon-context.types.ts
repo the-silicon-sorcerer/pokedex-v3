@@ -6,9 +6,10 @@ export interface ContextValue {
 }
 
 export interface PokeActions {
-    type: 'SET_DISPLAY_POKEMON'
-    payload: Array<PokeData>
+    type: 'SET_DISPLAY_POKEMON' | 'SET_LOADING'
+    payload: Array<PokeData> | boolean
 }
 export interface PokeState {
     displayPokemon: Array<PokeData>
+    isLoading: boolean
 }

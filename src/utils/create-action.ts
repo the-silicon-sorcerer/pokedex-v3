@@ -1,8 +1,8 @@
 interface ActionObject {
-    type: string,
-    payload: {}
+    type: any
+    payload: any
 }
 
-export const createAction = (type: string, payload: {}): ActionObject => {
+export const createAction = <T extends ActionObject>(type: T['type'], payload: T['payload']): ActionObject => {
     return { type: type, payload: payload }
 }
