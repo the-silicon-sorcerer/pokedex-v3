@@ -47,7 +47,7 @@ const HomeContent = () => {
                         })
                     }
                 </div >}
-            {isLoading ||
+            {(isLoading || displayPokemon.length < 16) ||
                 <div className="pagination-container">
                     {currentPage > 1 && <div className="pagination-select" onClick={() => pageSelectorOnClick(-1)}>Prev</div>}
                     {createCurrentArray(currentPage)}
