@@ -49,9 +49,9 @@ const HomeContent = () => {
                 </div >}
             {isLoading ||
                 <div className="pagination-container">
-                    <div className="pagination-select" onClick={() => pageSelectorOnClick(-1)}>Prev</div>
+                    {currentPage > 1 && <div className="pagination-select" onClick={() => pageSelectorOnClick(-1)}>Prev</div>}
                     {createCurrentArray(currentPage)}
-                    <div className="pagination-select" onClick={() => pageSelectorOnClick(1)}>Next</div>
+                    {currentPage * 16 <= MAX_INDEX && < div className="pagination-select" onClick={() => pageSelectorOnClick(1)}>Next</div>}
                 </div>}
         </>
     )
