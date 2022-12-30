@@ -27,6 +27,7 @@
     font-size: larger;
     text-align: center;
     border: none;
+    text-decoration: none;
 }
 
 .home-search-input:hover,
@@ -43,7 +44,7 @@
 
 .home-search-advanced {
     margin: 30px 10px;
-    background-color: lightgrey;
+    background-color: rgb(211, 211, 211);
     height: 40px;
     padding: 0px 15px;
     border-radius: 50px;
@@ -53,4 +54,8 @@
     align-items: center;
     font-size: small;
     border: 1px solid black;
+}
+
+.home-search-advanced:hover {
+    background-color: rgb(194, 194, 194);
 }

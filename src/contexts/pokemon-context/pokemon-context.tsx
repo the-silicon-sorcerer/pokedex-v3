@@ -1,10 +1,10 @@
 import React, { createContext, useEffect, useReducer } from "react";
-import axios from "axios";
 
 import { ContextValue, PokeActions, PokeState } from './pokemon-context.types'
 import { PokeData } from "../../utils/general-types";
 import { createAction } from "../../utils/create-action";
-import { MAX_INDEX } from "../../utils/misc-global-vals";
+import { currentPokeIndexes } from "../../utils/current-poke-index";
+import { fetchPokemon } from "../../utils/fetch-pokemon";
 
 export const PokeContext = createContext<ContextValue>({} as ContextValue)
 
@@ -52,28 +52,6 @@ export const PokeProvider = ({ children }: { children: React.ReactNode }) => {
 
     const [pokeState, pokeDispatch] = useReducer(pokeReducer, intialPokeState)
     const value = { pokeState, pokeDispatch }
-
-    const fetchPokemon = async (minId: number, maxId: number): Promise<PokeData[]> => {
-        const pokeArray = []
-        for (let i = minId; i <= maxId; i++) {
-            pokeArray.push(axios(`https://pokeapi.co/api/v2/pokemon/${i}`))
-        }
-        return Promise.all(pokeArray).then((res) => {
-            return res.map((res) => {
-                return res.data
-            })
-        })
-    }
-
-    // Given a current page return range of indexes to fill page; unless reached
-    // Max pokemon - return array containing last 16 indexes
-
-    const currentPokeIndexes = (currentPage: number): [number, number] => {
-        if (currentPage * 16 >= MAX_INDEX) {
-            return [MAX_INDEX - 15, MAX_INDEX]
-        }
-        return [(currentPage - 1) * 16 + 1, currentPage * 16]
-    }
 
     useEffect(() => {
         pokeDispatch(createAction<PokeActions>("SET_LOADING", true))
